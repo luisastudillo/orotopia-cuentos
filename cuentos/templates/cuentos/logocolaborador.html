@@ -2,17 +2,20 @@
 
     {% block content %}
 
-    	<h3>Colaborador: {{ titulo }}</h3>
-    	<h4>Ingrese la nueva linea 1</h4>
+    	<h3>Colaborador</h3>
+    	<h4>Seleccione el nuevo logo para {{ colaborador.linea1 }} {{ colaborador.linea2 }}</h4>
+    	<p>Logo anterior:</p>
+    	<img style="width: 10vw;"  src="{{ colaborador.logo.url }}" />
+
 		<div >
 			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Linea 1: </label>
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Logo nuevo: </label>
 						<div class="col-sm-8">
 						<div class="row">
 							<div class="col-xs-10 col-sm-6">
-								{{ form.linea1 }}
+								{{ form.logo }}
 							</div>
 						</div>
 					</div>

@@ -9,12 +9,15 @@ def redirectListaCuentos(request):
 	return redirect('listaCuentos', permanent=False)
 
 def listaCuentos(request):
-	lista = Cuento.objects.all()
-	return render(request, 'cuentos/cuentosindex.html', {'lista': lista})
+	listacuentos = Cuento.objects.all()
+	listacolabs = Colaborador.objects.all()
+	config = Config.objects.get(id=1)
+	return render(request, 'cuentos/cuentosindex.html', {'listacuentos': listacuentos, 'listacolabs': listacolabs, 'config':config})
 
 def verCuento(request, cuentoid):
 	lista = Pagina.objects.filter(cuento=cuentoid)
 	cuento = Cuento.objects.get(id=cuentoid)
+
 	return render(request, 'cuentos/cuento.html', {'lista': lista, 'cuento': cuento})
 
 def agregarCuento(request):
@@ -224,3 +227,137 @@ def listaPaginas(request, cuentoid):
 	lista = Pagina.objects.filter(cuento=cuentoid)
 	cuento = Cuento.objects.get(id=cuentoid)
 	return render(request, 'cuentos/listapaginas.html', {'lista': lista, 'cuento':cuento})
+
+def config(request):
+	lista = Colaborador.objects.all()
+	config = Config.objects.get(id=1)
+	return render(request, 'cuentos/config.html', {'lista': lista, 'config':config})
+
+def bannerConfig(request):
+	if request.user.is_staff:
+		config = Config.objects.get(id=1)
+		if request.POST:
+			form=BannerConfigForm(request.POST, request.FILES, instance=config)
+			if form.is_valid():
+				form.save()
+				config.save()
+				mensaje = "Cambios guardados"
+				return redirect('config')
+			else:
+				print("mal mal")
+		else:
+			form=BannerConfigForm(instance=config)
+			template = 'cuentos/bannerconfig.html'
+			book = {'form':form, 'config':config}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def tramaConfig(request):
+	if request.user.is_staff:
+		config = Config.objects.get(id=1)
+		if request.POST:
+			form=TramaConfigForm(request.POST, request.FILES, instance=config)
+			if form.is_valid():
+				form.save()
+				config.save()
+				mensaje = "Cambios guardados"
+				return redirect('config')
+			else:
+				print("mal mal")
+		else:
+			form=TramaConfigForm(instance=config)
+			template = 'cuentos/tramaconfig.html'
+			book = {'form':form, 'config':config}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def colaboradorLogo(request, colaboradorid):
+	if request.user.is_staff:
+		colaborador = Colaborador.objects.get(id=colaboradorid)
+		if request.POST:
+			form=LogoColaboradorForm(request.POST, request.FILES, instance=colaborador)
+			if form.is_valid():
+				form.save()
+				colaborador.save()
+				mensaje = "Cambios guardados"
+				return redirect('config')
+			else:
+				print("mal mal")
+		else:
+			form=LogoColaboradorForm(instance=colaborador)
+			template = 'cuentos/logocolaborador.html'
+			book = {'form':form, 'colaborador':colaborador}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def colaboradorLinea1(request, colaboradorid):
+	if request.user.is_staff:
+		colaborador = Colaborador.objects.get(id=colaboradorid)
+		if request.POST:
+			form=Linea1ColaboradorForm(request.POST, instance=colaborador)
+			if form.is_valid():
+				form.save()
+				colaborador.save()
+				mensaje = "Cambios guardados"
+				return redirect('config')
+			else:
+				print("mal mal")
+		else:
+			form=Linea1ColaboradorForm(instance=colaborador)
+			titulo=colaborador.linea1 + " " + colaborador.linea2
+			template = 'cuentos/linea1colaborador.html'
+			book = {'form':form, 'colaborador':colaborador, 'titulo':titulo}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def colaboradorLinea2(request, colaboradorid):
+	if request.user.is_staff:
+		colaborador = Colaborador.objects.get(id=colaboradorid)
+		if request.POST:
+			form=Linea1ColaboradorForm(request.POST, instance=colaborador)
+			if form.is_valid():
+				form.save()
+				colaborador.save()
+				mensaje = "Cambios guardados"
+				return redirect('config')
+			else:
+				print("mal mal")
+		else:
+			form=Linea1ColaboradorForm(instance=colaborador)
+			titulo=colaborador.linea1 + " " + colaborador.linea2
+			template = 'cuentos/linea2colaborador.html'
+			book = {'form':form, 'colaborador':colaborador, 'titulo':titulo}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def colaboradorEliminar(request, colaboradorid):
+	if request.user.is_staff:
+		colaborador = Colaborador.objects.get(id=colaboradorid)
+		if request.POST:
+			colaborador.delete()
+			mensaje = "Cuento eliminado"
+			return redirect('config', permanent=False)
+		else:
+			template = 'cuentos/eliminarColaborador.html'
+			book = {'colaborador':colaborador}
+			return render(request, template, book)
+	else:
+		return redirect('listaCuentos', permanent=False)
+
+def colaboradorAgregar(request):
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			form = ColaboradorForm(request.POST, request.FILES)
+			if form.is_valid():
+				form.save()
+			else:
+				error=True
+		form = ColaboradorForm()
+		return render(request, 'cuentos/agregarcolaborador.html', {'form':form})
+	else:
+		return redirect('listaCuentos', permanent=False)

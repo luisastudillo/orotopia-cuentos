@@ -44,3 +44,12 @@ class Pagina(models.Model):
         img2.save(path2)
         self.imagen1=path1
         self.imagen2=path2
+
+class Config(models.Model):
+    banner = models.ImageField(upload_to='imagenes/')
+    trama = models.ImageField(upload_to='imagenes/')
+
+class Colaborador(models.Model):
+    logo = models.ImageField(upload_to='imagenes/')
+    linea1 = models.CharField(max_length=25)
+    linea2 = models.CharField(max_length=25)

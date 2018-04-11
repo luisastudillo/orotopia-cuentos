@@ -1,0 +1,61 @@
+{% extends 'cuentos/base.html' %}
+
+    {% block content %}
+
+    	<h2>Colaborador </h2>
+
+    	<h3>Agregar colaborador</h3>
+
+		<div >
+			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Logo: </label>
+						<div class="col-sm-8">
+						<div class="row">
+							<div class="col-xs-10 col-sm-6">
+								{{ form.logo }}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Linea1 </label>
+
+					<div class="col-sm-9">
+						{{ form.linea1 }}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Linea2 </label>
+
+					<div class="col-sm-9">
+						{{ form.linea2 }}
+					</div>
+				</div>
+															
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Aceptar
+						</button>
+				
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Limpiar
+						</button>
+						<button class="btn" type="button" title="Eliminar" class="btn btn-alert btn-circle" onclick="window.location.href='/cuentos/config'">
+							Cancelar
+						</button>
+					</div>
+				</div>
+
+				<div class="hr hr-24"></div>
+			</form>
+		</div >					
+								
+	{% endblock content %}
+	
+	

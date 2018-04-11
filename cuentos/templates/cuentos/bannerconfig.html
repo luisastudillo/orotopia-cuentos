@@ -2,17 +2,20 @@
 
     {% block content %}
 
-    	<h3>Colaborador: {{ titulo }}</h3>
-    	<h4>Ingrese la nueva linea 1</h4>
+    	<h3>Configuración</h3>
+    	<h4>Seleccione el nuevo banner del sitio</h4>
+    	<p>Banner anterior:</p>
+    	<img style="width: 50vw;"  src="{{ config.banner.url }}" />
+
 		<div >
 			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Linea 1: </label>
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Banner nuevo: </label>
 						<div class="col-sm-8">
 						<div class="row">
 							<div class="col-xs-10 col-sm-6">
-								{{ form.linea1 }}
+								{{ form.banner }}
 							</div>
 						</div>
 					</div>
