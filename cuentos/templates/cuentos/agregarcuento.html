@@ -1,0 +1,68 @@
+{% extends 'cuentos/base.html' %}
+
+    {% block content %}
+
+		{% if agregado  %}
+			<div class="alert alert-success">
+				<strong>Exito!</strong> Se creó el cuento.
+			</div>
+		{% endif %}
+
+		{% if error  %}
+			<div class="alert alert-warning">
+				<strong>Error!</strong> La se han ingresado datos no validos.
+			</div>
+		{% endif %}
+
+		<div >
+			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Titulo </label>
+
+					<div class="col-sm-9">
+						{{ form.titulo }}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Descripcion</label>
+
+					<div class="col-sm-9">
+						{{ form.descripcion }}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Portada: </label>
+						<div class="col-sm-8">
+						<div class="row">
+							<div class="col-xs-10 col-sm-6">
+								{{ form.portada }}
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Aceptar
+						</button>
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Limpiar
+						</button>
+						<button class="btn" type="button" title="Eliminar" class="btn btn-alert btn-circle" onclick="window.location.href='/cuentos/'">
+							Cancelar
+						</button>
+					</div>
+				</div>
+
+				<div class="hr hr-24"></div>
+			</form>
+		</div >					
+								
+	{% endblock content %}
+	
+	

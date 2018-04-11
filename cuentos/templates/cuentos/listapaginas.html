@@ -1,0 +1,46 @@
+{% extends 'cuentos/base.html' %}
+
+{% block content %}
+<!-- PAGE CONTENT BEGINS -->
+{% if mensaje  %}
+	<div class="alert alert-success"><strong>{{mensaje}}!</strong></div>
+{% endif %}
+<h3>Cuento: {{ cuento.titulo }}</h3>
+<h5>Titulo: {{ cuento.titulo }} <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/titulo'">Editar</button></h5>
+
+<h5>Descripción: {{ cuento.descripcion }} <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/descripcion'">Editar</button></h5>
+
+<h5>Portada: <img width="20%" height="20%" src="{{ cuento.portada.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/portada'">Editar</button></h5>
+
+<br>
+
+<table id="tablaQ" class="table table-striped table-hover" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Página</th>
+			<th>Imagen</th>
+			<th>Audio</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pagina in lista %}
+		<tr>
+			<td> {{ pagina.numero }} </td>
+			<td>
+				<img style="display:block;" width="20%" height="20%" src="{{ pagina.imagen.url }}" />
+				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/paginas/{{pagina.id}}/editar/imagen'">Cambiar</button>
+			</td>
+			<td>
+				<audio controls> <source src="{{ pagina.audio.url }}" type="audio/mpeg"> </audio>
+				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/paginas/{{pagina.id}}/editar/audio'">Cambiar</button>
+			</td>
+			<td><button type="button" title="Eliminar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/paginas/{{pagina.id}}/eliminar/'">Eliminar</button></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<button style="float:none;" onclick="window.location.href='/cuentos/{{cuento.id}}/paginas/agregar/'" class="btn btn-primary center-block">Agregar</button>
+<button style="float:none;" onclick="window.location.href='/'" class="btn btn-primary center-block">Cancelar</button>
+<button style="float:none;" onclick="window.location.href='/cuentos/{{cuento.id}}/ver/'" class="btn btn-primary center-block">Ver</button>
+
+{% endblock content %}

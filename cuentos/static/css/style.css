@@ -1,0 +1,306 @@
+.frame {
+  
+  background-size: 100% , cover;
+  width:100%;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+.container {
+  position: relative;
+}
+.container #trama {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  background-size: 100% , cover;
+  width:100%;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  filter: opacity(.25);
+}
+.container #trama * {
+   visibility: hidden;
+}
+.container .contenido {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  background-size: 100% , cover;
+  width:100%;
+  text-align: center;
+  color: white;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+body {
+  background-color: white;
+}
+.banner {
+  padding-top: 100%px;
+  padding-bottom: 30%;
+  background-size: 100% 100%, cover;
+  width:100%;
+  text-align: center;
+  color: white;
+}
+.frame h1{
+  color: white;
+}
+.frame h2{
+  color: white;
+}
+.frame button{
+  background-color: #8b8989 ;
+  border-radius: 15px;
+  border: 1px solid green;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.frame button:hover{
+  background-color: #C0C0C0;
+  border-radius: 12px;
+      border: 1px solid black;
+
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.frame:hover{
+  background-color: rgba(0,0,0,.5);
+  background-blend-mode: multiply;
+}
+.t0{
+  background-color:  rgba(147, 188, 255, 1);
+  background-blend-mode: multiply;
+}
+.t1 {
+  background-color: rgba(200,100,0,1);
+  background-blend-mode: multiply;
+}
+.t2{
+  background-color: rgba(115, 230, 0, 1);
+  background-blend-mode: multiply;
+}
+.t3{
+  background-color:  rgba(0, 230, 230, 1);
+  background-blend-mode: multiply;
+}
+.t4{
+  background-color:  rgba(0, 57, 230, 1);
+  background-blend-mode: multiply;
+}
+.t5{
+  background-color:  rgba(172, 0, 230, 1);
+  background-blend-mode: multiply;
+}
+.t6{
+  background-color:  rgba(230, 0, 115, 1);
+  background-blend-mode: multiply;
+}
+.t0:hover,.t1:hover,.t2:hover,.t3:hover,.t4:hover,.t5:hover,.t6:hover{
+  background-color: rgba(255,255,255,.5);
+  background-blend-mode: multiply;
+}
+
+.fm {
+    font-family: sans-serif;
+    /*background: black;*/
+  
+  display: block;
+    padding: 5px;
+  width: 100%;
+    z-index: 100;
+    position: fixed;
+    float: right;
+  
+  }
+ .bt{
+    background-color: #8b8989;
+    border: none;
+    color: white;
+    padding: 15px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+   .bt:hover{
+    background-color: #C0C0C0;
+    border: none;
+    color: white;
+    padding: 15px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  nav {
+  font-family: sans-serif;
+    /*background: black;*/
+  
+  display: block;
+    padding: 5px;
+  width: 97%;
+    z-index: 100;
+    position: fixed;
+    float: right;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display:inline-block;
+}
+
+nav a {
+    display: block;
+    width: 60px;
+
+}
+.nav-left{
+   float:left;  
+}
+.nav-right{
+   float:right;  
+}
+.nav-left li {
+    float: left;
+
+}
+
+.nav-right li {
+    float: right;
+}
+
+.footer {
+   /*position: fixed;*/
+   left: 0;
+   bottom: 0;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   width: 100%;
+   height: calc(1rem + 5.5vh);
+   background-color: white;
+   text-align: center;
+   z-index: 3;
+}
+
+.footer *{
+  margin: 0px;
+  margin: 0 auto;
+  height: 100%;
+  font-size:0.8vw;
+}
+
+.foot{
+  height: calc(1rem + 5.5vh);
+  display:flex;
+  margin-bottom:20px;
+  margin-top:20px;
+}
+
+.utmach{
+  height: 100%;
+  width: 10vw;
+}
+
+.utmach img{
+  width: 5vw;
+  height: 5vw;
+}
+
+.utmach .nom{
+  width: 5vw;
+  height: 2vw;
+}
+
+.colab{
+  width: 10vw;
+}
+
+.colab img{
+  width: 5vw;
+  height: 5vw;
+}
+
+.colab .texto{
+  height:10%;
+  padding-bottom: .5vw;
+  text-align: left;
+  width: auto;
+}
+
+.colab .label{
+  height:10%;
+  padding-bottom: .5vw;
+  text-align: center;
+  width: auto;
+}
+.info{
+  font-size: 2vh;
+  padding-top: calc(1rem + 2vw);
+}
+
+.dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color:rgba(0, 0, 0, 0);
+}
+
+.dropbtn img{
+    height: 2rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3e8e41;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding-left: 6px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 80%;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}

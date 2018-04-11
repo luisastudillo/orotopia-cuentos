@@ -1,0 +1,106 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+<head>	
+	<title>{{cuento.titulo}}</title>	
+	<script type="text/javascript" src="{% static 'js/ScrollMagic.min.js' %}"></script>
+	<link href="{% static 'css/stylecuento.css' %}" rel='stylesheet' type='text/css' />
+</head>
+<body onload="myFunction()">
+	<div class="social">
+		<ul>
+			<li><a href="/" class="icon"><span class="icon-home"></span></a></li>
+		</ul>
+	</div>
+
+	<div id="content-wrapper">		
+		<div class="scrollContent">
+			<div class="spacer s2">			
+			</div>
+		</div>
+		<script>
+			var controller = new ScrollMagic.Controller();			
+		</script>
+		<div id="sonido">					
+				<audio></audio>
+		</div>
+		<div id="titles">
+			<table  border="0" cellspacing="0" cellpadding="0" sizset="0" sizcache="15"> 
+				<tbody sizset="0" sizcache="15">
+					<tr> 
+				        <td>
+							<div id="portada" width="100%" height="100%">
+								<img  src="{{cuento.portada.url}}" >
+							</div>
+				        </td>					        
+				    </tr>
+					{% for pagina in lista %}
+
+						<tr>
+					        <td>
+								<div id="trigger0{{pagina.numero}}" width="100%" height="100%"></div>
+							</td>
+						</tr>
+
+					    <tr> 
+					        <td>
+								<div width="100%" height="100%">
+									<img  src="{{pagina.imagen1.url}}" >
+								</div>
+					        </td>					        
+					    </tr>
+					    <tr> 
+					        <td>
+								<div id="trigger{{pagina.numero}}" width="100%" height="100%">
+								</div>
+					        </td>					        
+					    </tr>
+					    <tr> 
+					        <td>
+								<div width="100%" height="100%">
+									<img  src="{{pagina.imagen2.url}}" >
+								</div>
+					        </td>					        
+					    </tr>
+					{% endfor %}
+				</tbody> 
+			</table>
+	<div class="footer">
+		
+		<p id="info">&copy; Copyright UTMACH-2017&#124;Universidad Técnica de Machala<br>
+		Km. 5/2 Vía Machala Pasaje<br id="clic">
+		2983362 - 2983363 - 2983364 - 2983365<br>
+		utmachala@utmachala.edu.ec<br>
+		.<br>.</p>
+	</div>
+		</div>
+		{% for pagina in lista %}
+			<script>
+				var scene = new ScrollMagic.Scene({triggerElement: "#trigger0{{pagina.numero}}", duration: 300})
+								.on('start', function () {
+										var x =document.getElementById("sonido");
+										x.innerHTML = '';
+									})
+								.addTo(controller);
+			</script>
+			<script>
+				var scene = new ScrollMagic.Scene({triggerElement: "#trigger{{pagina.numero}}", duration: 300})
+								.on('start', function () {
+										var x =document.getElementById("sonido");
+										x.innerHTML = '<audio autoplay><source src="{{pagina.audio.url}}"></audio>';
+									})
+								.addTo(controller);
+			</script>
+		{% endfor %}
+		<script>
+			function myFunction() {
+				
+			    alert("Page is loaded");
+			    x=document.getElementById('titles');
+				x.click();
+		}
+</script>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'cuentos/base.html' %}
+
+    {% block content %}
+
+    	Desea eliminar la pagina {{ pagina.numero }} del Cuento {{cuento.titulo}}
+    	<img width="10%" height="10%" src="{{ pagina.imagen.url }}" />
+
+		<div >
+			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
+															
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Aceptar
+						</button>
+				
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="button" title="Eliminar" class="btn btn-alert btn-circle" onclick="window.location.href='/cuentos/{{ cuento.id }}/paginas'">
+							Cancelar
+						</button>
+					</div>
+				</div>
+
+				<div class="hr hr-24"></div>
+			</form>
+		</div >					
+								
+	{% endblock content %}
+	
+	

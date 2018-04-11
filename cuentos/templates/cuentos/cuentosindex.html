@@ -1,0 +1,131 @@
+{% load mathfilters %}
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+</head>
+<body >
+	<nav class="nav">
+	    <div class="nav-left" >
+	    	<div class="dropdown">
+			  <button class="dropbtn"><img src="/media/imagenes/drop.png"></button>
+			  <div class="dropdown-content">
+			  	{% if user.is_superuser %}
+			    <a href="/cuentos/agregar">Nuevo</a>
+			    <a href="{% url 'logout' %}">Salir</a>
+			    {% for cuento in lista %}
+			    <a href="{{ cuento.id }}/paginas">{{ cuento.titulo }}</a>
+			    {% endfor %}
+			    {% else %}
+			    {% for cuento in lista %}
+			    <a href="{{ cuento.id }}/ver">{{ cuento.titulo }}</a>
+			    {% endfor %}
+			    {% endif %}
+			  </div>
+			</div>
+	  	</div>
+  	</nav>
+	<div style="background-image:url('/media/imagenes/banner.jpg');" class="banner">
+	</div>
+	{% for cuento in lista %}
+
+		{% if user.is_superuser %}
+			<div style="background-image:url('{{cuento.portada.url}}');" class="frame t{{ cuento.id|mod:7 }}">
+				<div class="container" >
+					<div id="trama"  style="background-image:url('/media/imagenes/trama.jpg');">
+						<a href="{{ cuento.id }}/paginas"><h2>{{ cuento.titulo }}</h2></a>
+						<p>{{ cuento.descripcion }}</p>
+						<button onclick="window.location.href='/cuentos/{{cuento.id}}/editar/'">Editar</button>
+						<button onclick="window.location.href='/cuentos/{{cuento.id}}/eliminar/'">Eliminar</button>
+					</div>
+					<div class="contenido">
+						<a href="{{ cuento.id }}/ver"><h2>{{ cuento.titulo }}</h2></a>
+						<p>{{ cuento.descripcion }}</p>
+						<button onclick="window.location.href='/cuentos/{{ cuento.id }}/paginas'">Editar</button>
+						<button onclick="window.location.href='/cuentos/{{cuento.id}}/eliminar/'">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<a href="{{ cuento.id }}/ver">
+				<div style="background-image:url('{{cuento.portada.url}}');" class="frame t{{ cuento.id|mod:7 }}">
+					<div class="container" >
+						<div id="trama"  style="background-image:url('/media/imagenes/trama.jpg');">
+							<h2>{{ cuento.titulo }}</h2>
+							<p>{{ cuento.descripcion }}</p>
+						</div>
+						<div class="contenido">
+							<h2>{{ cuento.titulo }}</h2>
+							<p>{{ cuento.descripcion }}</p>
+						</div>
+					</div>
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+	<div class="footer">
+		<div class="foot">
+		    <div class="utmach">
+		    	<img src="/media/imagenes/utmach.png">
+		        <img class="nom" src="/media/imagenes/utmacht.png">
+		    </div>
+		    <div style="border-left:2px solid black;margin:0 7.5px;height:12vh;border-color: grey">&nbsp;En colaboracion de:</div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/incp.png">
+		        <p class="label">Instituto Nacional de <br> Cultura y Patrimonio</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/incp.png">
+		        <p class="label">Instituto Nacional de <br> Cultura y Patrimonio</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/incp.png">
+		        <p class="label">Instituto Nacional de <br> Cultura y Patrimonio</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/incp.png">
+		        <p class="label">Instituto Nacional de <br> Cultura y Patrimonio</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/incp.png">
+		        <p class="label">Instituto Nacional de <br> Cultura y Patrimonio</p>
+		    </div>
+		    <div style="border-left:2px solid black;margin:0 7.5px;height:12vh;border-color: grey"></div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/utmach.png">
+		        <p class="label">Carrera de Comunicación</p>
+		        <p class="label">Social</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/utmach.png">
+		        <p class="label">Carrera de Comunicación</p>
+		        <p class="label">Social</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/utmach.png">
+		        <p class="label">Carrera de Comunicación</p>
+		        <p class="label">Social</p>
+		    </div>
+		    <div class="colab">
+		    	<p class="texto"></p>
+		    	<img src="/media/imagenes/utmach.png">
+		        <p class="label">Carrera de Comunicación</p>
+		        <p class="label">Social</p>
+		    </div>
+		</div>
+		<p class="info">&copy; Copyright UTMACH-2017&#124;Universidad Técnica de Machala<br>
+		Km. 5/2 Vía Machala Pasaje<br>
+		2983362 - 2983363 - 2983364 - 2983365<br>
+		utmachala@utmachala.edu.ec</p>
+	</div>
+</body>
+</html>
