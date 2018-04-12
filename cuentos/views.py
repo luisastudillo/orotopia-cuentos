@@ -72,7 +72,7 @@ def editarCuento(request, cuentoid):
 				return redirect('listaCuentos', permanent=False)
 		else:
 			form=CuentoForm(instance=cuento)
-			template = 'cuentos/editarCuento.html'
+			template = 'cuentos/editarcuento.html'
 			book = {'form':form}
 			return render(request, template, book)
 	else:
@@ -147,7 +147,7 @@ def editarPagina(request, cuentoid, paginaid):
 				print("mal mal")
 		else:
 			form=PaginaForm(instance=pagina)
-			template = 'cuentos/editarPagina.html'
+			template = 'cuentos/editarpagina.html'
 			book = {'form':form, 'cuento':cuento, 'pagina':pagina}
 			return render(request, template, book)
 	else:
@@ -203,7 +203,7 @@ def eliminarCuento(request, cuentoid):
 			mensaje = "Cuento eliminado"
 			return redirect('listaCuentos', permanent=False)
 		else:
-			template = 'cuentos/eliminarCuento.html'
+			template = 'cuentos/eliminarcuento.html'
 			book = {'cuento':cuento}
 			return render(request, template, book)
 	else:
@@ -343,7 +343,7 @@ def colaboradorEliminar(request, colaboradorid):
 			mensaje = "Cuento eliminado"
 			return redirect('config', permanent=False)
 		else:
-			template = 'cuentos/eliminarColaborador.html'
+			template = 'cuentos/eliminarcolaborador.html'
 			book = {'colaborador':colaborador}
 			return render(request, template, book)
 	else:
