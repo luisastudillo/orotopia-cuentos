@@ -1,5 +1,5 @@
 from django.db import models
-# Import Pillow:
+import os
 from PIL import Image
 
 class Cuento(models.Model):
@@ -31,19 +31,19 @@ class Pagina(models.Model):
         img = Image.open(imagen)
         width = img.size[0]
         height = img.size[1]
+        name = os.path.basename(imagen.path)
         path= imagen.path
         ext = path[-4:]
         path1 = path[:-4] + "1" + ext
+        name1 = name[:-4] + "1" + ext
         path2 = path[:-4] + "2" + ext
-        print("url: " + path)
-        print("path1: " + path1)
-        print("path2: " + path2)
+        name2 = name[:-4] + "2" + ext
         img1 = img.crop((0, 0, width, height/2))
         img1.save(path1)
         img2 = img.crop((0, height/2, width, height))
         img2.save(path2)
-        self.imagen1=path1
-        self.imagen2=path2
+        self.imagen1="imagenes/" + name1
+        self.imagen2="imagenes/" + name2
 
 class Config(models.Model):
     banner = models.ImageField(upload_to='imagenes/')
