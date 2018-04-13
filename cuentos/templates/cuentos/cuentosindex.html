@@ -12,17 +12,13 @@
 			  <button class="dropbtn"><img src="{% static 'img/drop.png' %}"></button>
 			  <div class="dropdown-content">
 			  	{% if user.is_superuser %}
-			    <a href="/cuentos/agregar">Nuevo</a>
-			    <a href="/cuentos/config">Opciones</a>
-			    <a href="{% url 'logout' %}">Salir</a>
-			    {% for cuento in lista %}
-			    <a href="{{ cuento.id }}/paginas">{{ cuento.titulo }}</a>
-			    {% endfor %}
-			    {% else %}
-			    {% for cuento in lista %}
-			    <a href="{{ cuento.id }}/ver">{{ cuento.titulo }}</a>
-			    {% endfor %}
+				    <a href="/cuentos/agregar">Nuevo</a>
+				    <a href="/cuentos/config">Opciones</a>
+				    <a href="{% url 'logout' %}">Salir</a>
 			    {% endif %}
+			    {% for cuento in listacuentos %}
+			    	<a href="{{ cuento.id }}/paginas">{{ cuento.titulo }}</a>
+			    {% endfor %}
 			  </div>
 			</div>
 	  	</div>
