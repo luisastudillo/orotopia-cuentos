@@ -1,0 +1,14 @@
+{% extends 'cuentos/base.html' %}
+
+    {% block content %}
+
+    	<div class="alert alert-success">
+			<strong>Error!</strong> la página aún está siendo procesada.
+		</div>
+		<button class="btn" type="button" title="Eliminar" class="btn btn-alert btn-circle" onclick="window.location.href='/cuentos/{{ cuento.id }}/paginas'">
+			Volver
+		</button>
+								
+	{% endblock content %}
+	
+	

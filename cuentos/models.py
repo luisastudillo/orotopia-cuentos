@@ -39,8 +39,9 @@ class Pagina(models.Model):
         path2 = path[:-4] + "2" + ext
         name2 = name[:-4] + "2" + ext
         img1 = img.crop((0, 0, width, height/2))
-        img1.save(path1)
         img2 = img.crop((0, height/2, width, height))
+        img.close()
+        img1.save(path1)
         img2.save(path2)
         self.imagen1="imagenes/" + name1
         self.imagen2="imagenes/" + name2

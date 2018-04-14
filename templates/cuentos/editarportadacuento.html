@@ -2,20 +2,20 @@
 
     {% block content %}
 
-    	<h3>Cuento: {{ cuento.titulo }}</h3>
-    	<h4>Seleccione la nueva imágen de la pagina {{ pagina.numero }}</h4>
-    	<p>Imágen anterior:</p>
-    	<img width="10%" height="10%" src="{{ pagina.imagen.url }}" />
-
+    	<h3>Cuento: {{ titulo }}</h3>
+    	<h4>Seleccione la nueva portada del cuento</h4>
+    	<p>Portada anterior:</p>
+    	<img style="width: 50vw;" src="{{ cuento.portada.url }}" />
+    	<!-- <p>Titulo anterior:</p> -->
 		<div >
 			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Imagen nueva: </label>
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Portada nueva: </label>
 						<div class="col-sm-8">
 						<div class="row">
 							<div class="col-xs-10 col-sm-6">
-								{{ form.imagen }}
+								{{ form.portada }}
 							</div>
 						</div>
 					</div>

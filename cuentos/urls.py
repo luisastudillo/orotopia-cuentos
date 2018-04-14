@@ -31,6 +31,7 @@ urlpatterns = [
 	path('<int:cuentoid>/paginas/<int:paginaid>/editar/imagen/', editarImagenPagina, name='editarImagenPagina'),
 	path('<int:cuentoid>/paginas/<int:paginaid>/editar/audio/', editarAudioPagina, name='editarAudioPagina'),
 	path('<int:cuentoid>/paginas/<int:paginaid>/eliminar/', eliminarPagina, name='eliminarPagina'),
+	path('<int:cuentoid>/paginas/erroreliminar/', errorEliminarPagina, name='errorEliminarPagina'),
 	path('config/', config, name='config'),
 	path('config/banner/', bannerConfig, name='bannerConfig'),
 	path('config/trama/', tramaConfig, name='tramaConfig'),

@@ -10,7 +10,7 @@
 
 <h5>Descripción: {{ cuento.descripcion }} <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/descripcion'">Editar</button></h5>
 
-<h5>Portada: <img width="20%" height="20%" src="{{ cuento.portada.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/portada'">Editar</button></h5>
+<h5>Portada: <img style="width: 30vw;" src="{{ cuento.portada.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/editar/portada'">Editar</button></h5>
 
 <br>
 
@@ -27,7 +27,7 @@
 		<tr>
 			<td> {{ pagina.numero }} </td>
 			<td>
-				<img style="display:block;" width="20%" height="20%" src="{{ pagina.imagen.url }}" />
+				<img style="display:block; width: 15vw;" src="{{ pagina.imagen.url }}" />
 				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/{{cuento.id}}/paginas/{{pagina.id}}/editar/imagen'">Cambiar</button>
 			</td>
 			<td>

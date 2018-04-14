@@ -3,7 +3,7 @@
     {% block content %}
 
     	Desea eliminar la pagina {{ pagina.numero }} del Cuento {{cuento.titulo}}
-    	<img width="10%" height="10%" src="{{ pagina.imagen.url }}" />
+    	<img style="width: 30vw;" src="{{ pagina.imagen.url }}" />
 
 		<div >
 			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
