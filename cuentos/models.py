@@ -27,20 +27,28 @@ class Pagina(models.Model):
     	cuento.n_paginas = pagina
     	cuento.save()
     def dividir(self):
+        basewidth = 600
         imagen = self.imagen
-        img = Image.open(imagen)
-        width = img.size[0]
-        height = img.size[1]
-        name = os.path.basename(imagen.path)
-        path= imagen.path
+        with Image.open(imagen) as img:
+            path= imagen.path
+            print("Abriendo imagen " + os.path.basename(path))
+            width = img.size[0]
+            height = img.size[1]
+            name = os.path.basename(imagen.path)
+            wpercent = (basewidth/float(width))
+            hsize = int((float(height)*float(wpercent)))
+            img1 = img.crop((0, 0, width, height/2))
+            img2 = img.crop((0, height/2, width, height))
+            img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+            img.save(path)
+            print("Cerrando imagen " + os.path.basename(path))
+        
         ext = path[-4:]
         path1 = path[:-4] + "1" + ext
         name1 = name[:-4] + "1" + ext
         path2 = path[:-4] + "2" + ext
         name2 = name[:-4] + "2" + ext
-        img1 = img.crop((0, 0, width, height/2))
-        img2 = img.crop((0, height/2, width, height))
-        img.close()
+        
         img1.save(path1)
         img2.save(path2)
         self.imagen1="imagenes/" + name1

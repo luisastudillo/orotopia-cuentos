@@ -21,7 +21,7 @@ from cuentos.views import redirectListaCuentos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cuentos/', include('cuentos.urls')),
+    path('', include('cuentos.urls')),
     path('', include('django.contrib.auth.urls')),
     path('', redirectListaCuentos, name='redirectListaCuentos'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

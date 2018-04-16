@@ -68,23 +68,6 @@ def agregarPagina(request, cuentoid):
 	else:
 		return redirect('listaCuentos', permanent=False)
 
-def editarCuento(request, cuentoid):
-	if request.user.is_staff:
-		cuento = Cuento.objects.get(id=cuentoid)
-		if request.POST:
-			form=CuentoForm(request.POST,instance=cuento)
-			if form.is_valid():
-				form.save()
-				mensaje = "Cambios guardados"
-				return redirect('listaCuentos', permanent=False)
-		else:
-			form=CuentoForm(instance=cuento)
-			template = 'cuentos/editarcuento.html'
-			book = {'form':form}
-			return render(request, template, book)
-	else:
-		return redirect('listaCuentos', permanent=False)
-
 def editarTituloCuento(request, cuentoid):
 	if request.user.is_staff:
 		cuento = Cuento.objects.get(id=cuentoid)
@@ -145,27 +128,6 @@ def editarPortadaCuento(request, cuentoid):
 	else:
 		return redirect('listaCuentos', permanent=False)
 
-def editarPagina(request, cuentoid, paginaid):
-	if request.user.is_staff:
-		pagina = Pagina.objects.get(id=paginaid)
-		cuento = Cuento.objects.get(id=cuentoid)
-		if request.POST:
-			form=PaginaForm(request.POST, request.FILES, instance=pagina)
-			if form.is_valid():
-				print("Bien bien")
-				form.save()
-				mensaje = "Cambios guardados"
-				return redirect('listaPaginas', cuentoid)
-			else:
-				print("mal mal")
-		else:
-			form=PaginaForm(instance=pagina)
-			template = 'cuentos/editarpagina.html'
-			book = {'form':form, 'cuento':cuento, 'pagina':pagina}
-			return render(request, template, book)
-	else:
-		return redirect('listaCuentos', permanent=False)
-
 def editarImagenPagina(request, cuentoid, paginaid):
 	if request.user.is_staff:
 		global rutaeliminar
@@ -176,12 +138,19 @@ def editarImagenPagina(request, cuentoid, paginaid):
 		if request.POST:
 			form=ImagenPaginaForm(request.POST, request.FILES, instance=pagina)
 			if form.is_valid():
-				form.save()
-				pagina.dividir()
-				pagina.save()
-				os.remove(rutaeliminar)
-				os.remove(rutaeliminar1)
-				os.remove(rutaeliminar2)
+				try:
+					form.save()
+					pagina.dividir()
+					pagina.save()
+					os.remove(rutaeliminar)
+					print("Imagen borrada " + os.path.basename(rutaeliminar))
+					os.remove(rutaeliminar1)
+					print("Imagen1 borrada " + os.path.basename(rutaeliminar1))
+					os.remove(rutaeliminar2 )
+					print("Imagen2 borrada " + os.path.basename(rutaeliminar2))
+				except Exception as e:
+					print(e)
+					return redirect('errorEliminarPagina', cuentoid, permanent=False)
 				mensaje = "Cambios guardados"
 				return redirect('listaPaginas', cuentoid)
 			else:
@@ -191,8 +160,9 @@ def editarImagenPagina(request, cuentoid, paginaid):
 			rutaeliminar1 = pagina.imagen1.path
 			rutaeliminar2 = pagina.imagen2.path
 			form=ImagenPaginaForm(instance=pagina)
+			numero = pagina.numero
 			template = 'cuentos/cambiarimagenpagina.html'
-			book = {'form':form, 'cuento':cuento, 'pagina':pagina}
+			book = {'form':form, 'cuento':cuento, 'numero':numero}
 			return render(request, template, book)
 	else:
 		return redirect('listaCuentos', permanent=False)
@@ -270,6 +240,7 @@ def eliminarPagina(request, cuentoid, paginaid):
 				cuento.save()
 				return redirect('listaPaginas', cuentoid,  permanent=False)
 			except Exception as e:
+				print(e)
 				return redirect('errorEliminarPagina', cuentoid, permanent=False)
 			
 		else:

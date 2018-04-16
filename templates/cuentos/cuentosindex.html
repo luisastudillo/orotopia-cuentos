@@ -12,8 +12,8 @@
 			  <button class="dropbtn"><img src="{% static 'img/drop.png' %}"></button>
 			  <div class="dropdown-content">
 			  	{% if user.is_superuser %}
-				    <a href="/cuentos/agregar">Nuevo</a>
-				    <a href="/cuentos/config">Opciones</a>
+				    <a href="/agregar">Nuevo</a>
+				    <a href="/config">Opciones</a>
 				    <a href="{% url 'logout' %}">Salir</a>
 			    {% endif %}
 			    {% for cuento in listacuentos %}
@@ -33,14 +33,14 @@
 					<div id="trama"  style="background-image:url('{{ config.trama.url }}');">
 						<a href="{{ cuento.id }}/paginas"><h2>{{ cuento.titulo }}</h2></a>
 						<p>{{ cuento.descripcion }}</p>
-						<button onclick="window.location.href='/cuentos/{{cuento.id}}/editar/'">Editar</button>
-						<button onclick="window.location.href='/cuentos/{{cuento.id}}/eliminar/'">Eliminar</button>
+						<button onclick="window.location.href='/{{cuento.id}}/editar/'">Editar</button>
+						<button onclick="window.location.href='/{{cuento.id}}/eliminar/'">Eliminar</button>
 					</div>
 					<div class="contenido">
 						<a href="{{ cuento.id }}/ver"><h2>{{ cuento.titulo }}</h2></a>
 						<p>{{ cuento.descripcion }}</p>
-						<button onclick="window.location.href='/cuentos/{{ cuento.id }}/paginas'">Editar</button>
-						<button onclick="window.location.href='/cuentos/{{cuento.id}}/eliminar/'">Eliminar</button>
+						<button onclick="window.location.href='/{{ cuento.id }}/paginas'">Editar</button>
+						<button onclick="window.location.href='/{{cuento.id}}/eliminar/'">Eliminar</button>
 					</div>
 				</div>
 			</div>

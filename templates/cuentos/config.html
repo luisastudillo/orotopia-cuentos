@@ -7,8 +7,8 @@
 {% endif %}
 <h3>Configuración</h3>
 
-<h5>Banner: <img style="width: 50vw;" src="{{ config.banner.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/banner'">Editar</button></h5>
-<h5>Trama: <img style="width: 50vw;" src="{{ config.trama.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/trama'">Editar</button></h5>
+<h5>Banner: <img style="width: 50vw;" src="{{ config.banner.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/banner'">Editar</button></h5>
+<h5>Trama: <img style="width: 50vw;" src="{{ config.trama.url }}" /> <button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/trama'">Editar</button></h5>
 
 <br>
 
@@ -25,22 +25,22 @@
 		<tr>
 			<td>
 				<img style="display:block; width: 8vw;"  src="{{ colaborador.logo.url }}" />
-				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/colaborador/{{colaborador.id}}/logo'">Cambiar</button>
+				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/colaborador/{{colaborador.id}}/logo'">Cambiar</button>
 			</td>
 			<td> 
 				{{ colaborador.linea1 }}
-				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/colaborador/{{colaborador.id}}/linea1'">Cambiar</button>
+				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/colaborador/{{colaborador.id}}/linea1'">Cambiar</button>
 			</td>
 			<td> 
 				{{ colaborador.linea2 }}
-				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/colaborador/{{colaborador.id}}/linea2'">Cambiar</button>
+				<button type="button" title="Editar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/colaborador/{{colaborador.id}}/linea2'">Cambiar</button>
 			</td>
-			<td><button type="button" title="Eliminar" class="btn btn-primary btn-circle" onclick="window.location.href='/cuentos/config/colaborador/{{colaborador.id}}/eliminar/'">Eliminar</button></td>
+			<td><button type="button" title="Eliminar" class="btn btn-primary btn-circle" onclick="window.location.href='/config/colaborador/{{colaborador.id}}/eliminar/'">Eliminar</button></td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
-<button style="float:none;" onclick="window.location.href='/cuentos/config/colaborador/agregar/'" class="btn btn-primary center-block">Agregar</button>
+<button style="float:none;" onclick="window.location.href='/config/colaborador/agregar/'" class="btn btn-primary center-block">Agregar</button>
 <button style="float:none;" onclick="window.location.href='/'" class="btn btn-primary center-block">Volver</button>
 
 {% endblock content %}
