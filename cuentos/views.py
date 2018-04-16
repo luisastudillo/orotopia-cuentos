@@ -2,12 +2,6 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from django.shortcuts import redirect
-import os
-
-global rutaeliminar
-global rutaeliminar1
-global rutaeliminar2
-global rutaeliminar3
 
 # Create your views here.
 
@@ -106,20 +100,14 @@ def editarDescripcionCuento(request, cuentoid):
 
 def editarPortadaCuento(request, cuentoid):
 	if request.user.is_staff:
-		global rutaeliminar
 		cuento = Cuento.objects.get(id=cuentoid)
 		if request.POST:
 			form=PortadaCuentoForm(request.POST,request.FILES,instance=cuento)
 			if form.is_valid():
 				form.save()
-				print("Anterior " + os.path.basename(rutaeliminar))
-				print("Nueva " + os.path.basename(cuento.portada.path))
-				os.remove(rutaeliminar)
 				mensaje = "Cambios guardados"
 				return redirect('listaPaginas', cuentoid)
 		else:
-			rutaeliminar = cuento.portada.path
-			print("Se va a eliminar " + os.path.basename(rutaeliminar))
 			form=PortadaCuentoForm(instance=cuento)
 			titulo=cuento.titulo
 			template = 'cuentos/editarportadacuento.html'
@@ -130,59 +118,39 @@ def editarPortadaCuento(request, cuentoid):
 
 def editarImagenPagina(request, cuentoid, paginaid):
 	if request.user.is_staff:
-		global rutaeliminar
-		global rutaeliminar1
-		global rutaeliminar2
 		pagina = Pagina.objects.get(id=paginaid)
 		cuento = Cuento.objects.get(id=cuentoid)
 		if request.POST:
 			form=ImagenPaginaForm(request.POST, request.FILES, instance=pagina)
 			if form.is_valid():
-				try:
-					form.save()
-					pagina.dividir()
-					pagina.save()
-					os.remove(rutaeliminar)
-					print("Imagen borrada " + os.path.basename(rutaeliminar))
-					os.remove(rutaeliminar1)
-					print("Imagen1 borrada " + os.path.basename(rutaeliminar1))
-					os.remove(rutaeliminar2 )
-					print("Imagen2 borrada " + os.path.basename(rutaeliminar2))
-				except Exception as e:
-					print(e)
-					return redirect('errorEliminarPagina', cuentoid, permanent=False)
+				form.save()
+				pagina.dividir()
+				pagina.save()
 				mensaje = "Cambios guardados"
 				return redirect('listaPaginas', cuentoid)
 			else:
 				print("mal mal")
 		else:
-			rutaeliminar = pagina.imagen.path
-			rutaeliminar1 = pagina.imagen1.path
-			rutaeliminar2 = pagina.imagen2.path
 			form=ImagenPaginaForm(instance=pagina)
-			numero = pagina.numero
 			template = 'cuentos/cambiarimagenpagina.html'
-			book = {'form':form, 'cuento':cuento, 'numero':numero}
+			book = {'form':form, 'cuento':cuento, 'pagina':pagina}
 			return render(request, template, book)
 	else:
 		return redirect('listaCuentos', permanent=False)
 
 def editarAudioPagina(request, cuentoid, paginaid):
 	if request.user.is_staff:
-		global rutaeliminar
 		pagina = Pagina.objects.get(id=paginaid)
 		cuento = Cuento.objects.get(id=cuentoid)
 		if request.POST:
 			form=AudioPaginaForm(request.POST, request.FILES, instance=pagina)
 			if form.is_valid():
 				form.save()
-				os.remove(rutaeliminar)
 				mensaje = "Cambios guardados"
 				return redirect('listaPaginas', cuentoid)
 			else:
 				print("mal mal")
 		else:
-			rutaeliminar = pagina.audio.path
 			form=AudioPaginaForm(instance=pagina)
 			template = 'cuentos/cambiaraudiopagina.html'
 			book = {'form':form, 'cuento':cuento, 'pagina':pagina}
@@ -196,15 +164,7 @@ def eliminarCuento(request, cuentoid):
 		if request.POST:
 			lista = Pagina.objects.filter(cuento=cuentoid)
 			for pagina in lista:
-				ruta = pagina.imagen.path
-				ruta1 = pagina.imagen1.path
-				ruta2 = pagina.imagen2.path
-				ruta3 = pagina.audio.path
 				pagina.delete()
-				os.remove(ruta)
-				os.remove(ruta1)
-				os.remove(ruta2)
-				os.remove(ruta3)
 			cuento.delete()
 			mensaje = "Cuento eliminado"
 			return redirect('listaCuentos', permanent=False)
@@ -217,37 +177,20 @@ def eliminarCuento(request, cuentoid):
 
 def eliminarPagina(request, cuentoid, paginaid):
 	if request.user.is_staff:
-		global rutaeliminar
-		global rutaeliminar1
-		global rutaeliminar2
-		global rutaeliminar3
 		cuento = Cuento.objects.get(id=cuentoid)
 		pagina = Pagina.objects.get(id=paginaid)
 		if request.POST:
-			try:
-				os.remove(rutaeliminar)
-				os.remove(rutaeliminar1)
-				os.remove(rutaeliminar2)
-				os.remove(rutaeliminar3)
-				pagina.delete()
-				lista = Pagina.objects.filter(cuento=cuentoid)
-				num=0
-				for pagina in lista:
-					num=num+1
-					pagina.numero=num
-					pagina.save()
-				cuento.n_paginas=num
-				cuento.save()
-				return redirect('listaPaginas', cuentoid,  permanent=False)
-			except Exception as e:
-				print(e)
-				return redirect('errorEliminarPagina', cuentoid, permanent=False)
-			
+			pagina.delete()
+			lista = Pagina.objects.filter(cuento=cuentoid)
+			num=0
+			for pagina in lista:
+				num=num+1
+				pagina.numero=num
+				pagina.save()
+			cuento.n_paginas=num
+			cuento.save()
+			return redirect('listaPaginas', cuentoid,  permanent=False)
 		else:
-			rutaeliminar = pagina.imagen.path
-			rutaeliminar1 = pagina.imagen1.path
-			rutaeliminar2 = pagina.imagen2.path
-			rutaeliminar3 = pagina.audio.path
 			template = 'cuentos/eliminarpagina.html'
 			book = {'cuento':cuento, 'pagina':pagina}
 			return render(request, template, book)
@@ -270,23 +213,17 @@ def config(request):
 
 def bannerConfig(request):
 	if request.user.is_staff:
-		global rutaeliminar
 		config = Config.objects.all().first()
 		if request.POST:
 			form=BannerConfigForm(request.POST, request.FILES, instance=config)
 			if form.is_valid():
 				form.save()
 				config.save()
-				print("Actual: " + config.banner.path)
-				print("Anterior: " + rutaeliminar)
-				os.remove(rutaeliminar)
 				mensaje = "Cambios guardados"
 				return redirect('config')
 			else:
 				print("mal mal")
 		else:
-			rutaeliminar = config.banner.path
-			print("Grabada anterior: " + rutaeliminar)
 			form=BannerConfigForm(instance=config)
 			template = 'cuentos/bannerconfig.html'
 			book = {'form':form, 'config':config}
@@ -296,20 +233,17 @@ def bannerConfig(request):
 
 def tramaConfig(request):
 	if request.user.is_staff:
-		global rutaeliminar
 		config = Config.objects.all().first()
 		if request.POST:
 			form=TramaConfigForm(request.POST, request.FILES, instance=config)
 			if form.is_valid():
 				form.save()
 				config.save()
-				os.remove(rutaeliminar)
 				mensaje = "Cambios guardados"
 				return redirect('config')
 			else:
 				print("mal mal")
 		else:
-			rutaeliminar = config.trama.path
 			form=TramaConfigForm(instance=config)
 			template = 'cuentos/tramaconfig.html'
 			book = {'form':form, 'config':config}
@@ -319,19 +253,16 @@ def tramaConfig(request):
 
 def colaboradorLogo(request, colaboradorid):
 	if request.user.is_staff:
-		global rutaeliminar
 		colaborador = Colaborador.objects.get(id=colaboradorid)
 		if request.POST:
 			form=LogoColaboradorForm(request.POST, request.FILES, instance=colaborador)
 			if form.is_valid():
 				form.save()
-				os.remove(rutaeliminar)
 				mensaje = "Cambios guardados"
 				return redirect('config')
 			else:
 				print("mal mal")
 		else:
-			rutaeliminar = colaborador.logo.path
 			form=LogoColaboradorForm(instance=colaborador)
 			template = 'cuentos/logocolaborador.html'
 			book = {'form':form, 'colaborador':colaborador}
@@ -381,15 +312,12 @@ def colaboradorLinea2(request, colaboradorid):
 
 def colaboradorEliminar(request, colaboradorid):
 	if request.user.is_staff:
-		global rutaeliminar
 		colaborador = Colaborador.objects.get(id=colaboradorid)
 		if request.POST:
 			colaborador.delete()
-			os.remove(rutaeliminar)
 			mensaje = "Cuento eliminado"
 			return redirect('config', permanent=False)
 		else:
-			rutaeliminar = colaborador.logo.path
 			template = 'cuentos/eliminarcolaborador.html'
 			book = {'colaborador':colaborador}
 			return render(request, template, book)

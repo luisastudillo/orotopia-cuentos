@@ -3,13 +3,16 @@
     {% block content %}
 
     	<h3>Cuento: {{ cuento.titulo }}</h3>
-    	<h4>Seleccione la nueva imágen de la pagina {{ numero }}</h4>
+    	<h4>Seleccione la nueva imágen de la pagina {{ pagina.numero }}</h4>
+    	<p>Imágen anterior:</p>
+    	<img style="width: 50vw;" src="{{ pagina.imagen.url }}" />
 
 		<div >
 			<form method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">{%csrf_token %}
 
 				<div class="form-group">
-						<div class="col-sm-8">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Imagen nueva: </label>
+					<div class="col-sm-8">
 						<div class="row">
 							<div class="col-xs-10 col-sm-6">
 								{{ form.imagen }}
